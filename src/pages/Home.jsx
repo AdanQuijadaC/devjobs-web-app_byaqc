@@ -87,14 +87,14 @@ function Home({ data, darkMode, toggleDarkMode, detail, setDetail }) {
       });
     }
 
-    if (filterResult.length > 0) {
+    if (filterResult !== undefined && filterResult.length > 0) {
       setDefaultItemsLoaded(filterResult);
     }
   }, []);
 
   useEffect(() => {
     setDefaultItemsLoaded(filterResult);
-    if (filterResult.length == 0) {
+    if ((filterResult !== undefined && filterResult.length) == 0) {
       setDefaultItemsLoaded(() => {
         return data.filter((item, index) => {
           return index < 10;
@@ -430,7 +430,8 @@ function Home({ data, darkMode, toggleDarkMode, detail, setDetail }) {
           <section className="mt-32 max-w-[1100px] w-10/12 mx-auto flex flex-col gap-14 sm:grid sm:grid-cols-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-4">
             {/* item */}
 
-            {defaultItemsLoaded.length > 0 &&
+            {defaultItemsLoaded !== undefined &&
+              defaultItemsLoaded.length > 0 &&
               defaultItemsLoaded.map((item, index) => {
                 return (
                   <button
@@ -619,7 +620,7 @@ function Home({ data, darkMode, toggleDarkMode, detail, setDetail }) {
               })}
           </section>
           {/* load more */}
-          {defaultItemsLoaded.length <= 10 && (
+          {defaultItemsLoaded !== undefined && defaultItemsLoaded.length <= 10 && (
             <div className="flex justify-center mt-12">
               <ButtonViolet
                 type={"button"}
